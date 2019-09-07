@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "unordered_map": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp",
+        "functional": "cpp",
+        "limits": "cpp",
+        "string": "cpp",
+        "ratio": "cpp",
+        "list": "cpp",
+        "climits": "cpp"
+    }
+}
