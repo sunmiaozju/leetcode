@@ -34,26 +34,35 @@
 #include <iostream>
 
 using namespace std;
-//   Definition for singly-linked list.
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x)
-        : val(x)
-        , next(NULL)
-    {
-    }
-};
+// struct ListNode {
+//     int val;
+//     ListNode* next;
+//     ListNode(int x)
+//         : val(x)
+//         , next(NULL)
+//     {
+//     }
+// };
 
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head)
     {
-        int pre_num = head->val;
-        head = head->next;
-        while (head->next != NULL) {
-            if (head->val == pre_num) {
-                        }
+        if (head == NULL) {
+            return NULL;
         }
+        int pre_num = head->val;
+        ListNode *first = head, *pre_point = head;
+        head = head->next;
+        while (head != NULL) {
+            if (head->val == pre_num) {
+                pre_point->next = head->next;
+                head = pre_point;
+            }
+            pre_num = head->val;
+            pre_point = head;
+            head = head->next;
+        }
+        return first;
     }
 };
