@@ -84,15 +84,15 @@ public:
     }
 };
 
-int main(int argc, const char** argv)
-{
-    Solution ss;
-    vector<int> nums;
-    nums.push_back(1);
-    nums.push_back(3);
-    nums.push_back(5);
-    nums.push_back(6);
+// int main(int argc, const char** argv)
+// {
+//     Solution ss;
+//     vector<int> nums;
+//     nums.push_back(1);
+//     nums.push_back(3);
+//     nums.push_back(5);
+//     nums.push_back(6);
 
-    ss.searchInsert(nums, 7);
-    return 0;
-}
+//     ss.searchInsert(nums, 7);
+//     return 0;
+// }
