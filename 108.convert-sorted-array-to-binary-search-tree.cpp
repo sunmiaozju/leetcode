@@ -36,19 +36,59 @@
  * 
  * 
  */
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+//   Definition for a binary tree node.
+// struct TreeNode {
+//     int val;
+//     TreeNode* left;
+//     TreeNode* right;
+//     TreeNode(int x)
+//         : val(x)
+//         , left(NULL)
+//         , right(NULL)
+//     {
+//     }
+// };
+
 class Solution {
 public:
-    TreeNode* sortedArrayToBST(vector<int>& nums) {
-        
+    TreeNode* sortedArrayToBST(vector<int>& nums)
+    {
+        if (nums.empty()) {
+            return NULL;
+        }
+        return sortBST(nums, 0, nums.size());
+    }
+
+    TreeNode* sortBST(vector<int>& nums, int left, int right)
+    {
+        int index = left + ((right - left) >> 1);
+        TreeNode* root_node = new TreeNode(nums[index]);
+        if (left < index) {
+            root_node->left = sortBST(nums, left, index);
+        }
+        if (index + 1 < right) {
+            root_node->right = sortBST(nums, index + 1, right);
+        }
+        return root_node;
     }
 };
 
+// int main(int argc, const char** argv)
+// {
+//     Solution s;
+//     vector<int> nums;
+//     nums.push_back(-10);
+//     nums.push_back(-3);
+//     nums.push_back(0);
+//     nums.push_back(5);
+//     // nums.push_back(9);
+//     TreeNode* ans;
+//     ans = s.sortedArrayToBST(nums);
+//     return 0;
+// }
