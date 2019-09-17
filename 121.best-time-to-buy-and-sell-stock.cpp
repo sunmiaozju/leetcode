@@ -41,10 +41,20 @@
  * 
  * 
  */
+#include <climits>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        
+    int maxProfit(vector<int>& prices)
+    {
+        int min = INT_MAX, max = -INT_MAX;
+        for (size_t i = 1; i < prices.size(); i++) {
+            min = std::min(min, prices[i - 1]);
+            max = std::max(max, prices[i] - min);
+        }
+        return std::max(max, 0);
     }
 };
-
