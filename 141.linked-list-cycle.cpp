@@ -66,18 +66,34 @@
  * Can you solve it using O(1) (i.e. constant) memory?
  * 
  */
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+
+//   Definition for singly-linked list.
+#include <iostream>
+
+using namespace std;
+
+// struct ListNode {
+//     int val;
+//     ListNode* next;
+//     ListNode(int x)
+//         : val(x)
+//         , next(NULL)
+//     {
+//     }
+// };
+
 class Solution {
 public:
-    bool hasCycle(ListNode *head) {
-        
+    bool hasCycle(ListNode* head)
+    {
+        ListNode *slow = head, *fast = head;
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            slow = slow->next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
     }
 };
-
