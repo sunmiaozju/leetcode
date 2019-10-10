@@ -24,10 +24,29 @@
  * 
  * 
  */
+#include <cmath>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
-    int countPrimes(int n) {
-        
+    int countPrimes(int n)
+    {
+        vector<bool> isPrimes(n, true);
+        int ans = 0;
+        for (size_t i = 2; i < sqrt(n); ++i) {
+            if (isPrimes[i]) {
+                for (size_t j = i * i; j < n; j += i) {
+                    isPrimes[j] = false;
+                }
+            }
+        }
+        for (size_t i = 2; i < n; i++) {
+            if (isPrimes[i]) {
+                ans++;
+            }
+        }
+        return ans;
     }
 };
-
