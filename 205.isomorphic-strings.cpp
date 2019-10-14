@@ -46,11 +46,38 @@
  */
 
 // @lc code=start
+
+#include <string>
+#include <unordered_map>
+
+using namespace std;
+
 class Solution {
 public:
-    bool isIsomorphic(string s, string t) {
-        
+    bool isIsomorphic(string s, string t)
+    {
+        // unordered_map<char, char> table;
+        // unordered_map<char, char> table_1;
+        // for (size_t i = 0; i < s.size(); i++) {
+        //     if (table.find(s[i]) == table.end() && table_1.find(t[i]) == table_1.end()) {
+        //         table[s[i]] = t[i];
+        //         table_1[t[i]] = s[i];
+        //     } else if (table[s[i]] != t[i] || table_1[t[i]] != s[i]) {
+        //         return false;
+        //     }
+        // }
+        // return true;
+
+        char table_1[128] = { 0 };
+        char table_2[128] = { 0 };
+        for (size_t i = 0; i < s.size(); i++) {
+            if (table_1[s[i]] != table_2[t[i]]) {
+                return false;
+            }
+            table_1[s[i]] = i + 1;
+            table_2[t[i]] = i + 1;
+        }
+        return true;
     }
 };
 // @lc code=end
-
