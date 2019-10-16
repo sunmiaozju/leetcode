@@ -8,6 +8,10 @@
         "string": "cpp",
         "ratio": "cpp",
         "list": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp"
     }
 }
