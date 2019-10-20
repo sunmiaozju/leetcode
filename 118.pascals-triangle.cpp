@@ -67,14 +67,26 @@ public:
         // }
         // return ans;
 
-        vector<int> items;
+        // vector<int> items;
+        // vector<v_int> ans;
+        // for (int i = 0; i < numRows; i++) {
+        //     items.push_back(1);
+        //     for (int j = i - 1; j > 0; j--) {
+        //         items[j] = items[j - 1] + items[j];
+        //     }
+        //     ans.push_back(items);
+        // }
+        // return ans;
         vector<v_int> ans;
-        for (int i = 0; i < numRows; i++) {
-            items.push_back(1);
-            for (int j = i - 1; j > 0; j--) {
-                items[j] = items[j - 1] + items[j];
+        v_int tmp;
+        for (size_t i = 0; i < numRows; i++) {
+            if (i > 1) {
+                for (size_t j = tmp.size() - 1; j > 0; j--) {
+                    tmp[j] = tmp[j - 1] + tmp[j];
+                }
             }
-            ans.push_back(items);
+            tmp.push_back(1);
+            ans.push_back(tmp);
         }
         return ans;
     }
