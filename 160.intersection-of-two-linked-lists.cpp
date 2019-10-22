@@ -132,6 +132,7 @@ public:
         //     }
         // }
         // return NULL;
+
         if (headA == NULL || headB == NULL) {
             return NULL;
         }
@@ -150,5 +151,22 @@ public:
             }
         }
         return headA == NULL ? NULL : headA;
+        // if (headA == NULL || headB == NULL)
+        //     return NULL;
+
+        // ListNode *origin_A = headA, *origin_B = headB;
+        // while (headA != headB) {
+        //     if (headA == NULL) {
+        //         headA = origin_A;
+        //     } else {
+        //         headA = headA->next;
+        //     }
+        //     if (headB == NULL) {
+        //         headB = origin_B;
+        //     } else {
+        //         headB = headB->next;
+        //     }
+        // }
+        // return headA ? headA : NULL;
     }
 };

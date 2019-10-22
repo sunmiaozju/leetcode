@@ -57,19 +57,47 @@
  */
 
 // @lc code=start
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+
+#include <iostream>
+
+using namespace std;
+
+// Definition for singly-linked list.
+// struct ListNode {
+//     int val;
+//     ListNode* next;
+//     ListNode(int x)
+//         : val(x)
+//         , next(NULL)
+//     {
+//     }
+// };
+
 class Solution {
 public:
-    ListNode* insertionSortList(ListNode* head) {
-        
+    ListNode* insertionSortList(ListNode* head)
+    {
+        ListNode *pre = new ListNode(0), *cur = head;
+        while (cur) {
+            ListNode* index = pre;
+            ListNode* next_tmp = cur->next;
+            while (index && index->next) {
+                if (cur->val <= index->next->val) {
+                    ListNode* tmp = index->next;
+                    index->next = cur;
+                    index->next->next = tmp;
+                    break;
+                } else {
+                    index = index->next;
+                }
+            }
+            if (!index->next) {
+                index->next = cur;
+                cur->next = NULL;
+            }
+            cur = next_tmp;
+        }
+        return pre->next;
     }
 };
 // @lc code=end
-

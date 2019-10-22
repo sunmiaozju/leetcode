@@ -26,17 +26,32 @@ public:
         //         }
         // }
         // return ans;
-        unordered_map<int, int> map;
-        vector<int> ans;
 
-        for (size_t i = 0; i < nums.size(); i++) {
-            if (map.find(target - nums[i]) != map.end()) {
-                ans.push_back(map[target - nums[i]]);
-                ans.push_back(i);
+        // unordered_map<int, int> map;
+        // vector<int> ans;
+
+        // for (size_t i = 0; i < nums.size(); i++) {
+        //     if (map.find(target - nums[i]) != map.end()) {
+        //         ans.push_back(map[target - nums[i]]);
+        //         ans.push_back(i);
+        //         break;
+        //     }
+        //     map[nums[i]] = i;
+        // }
+        // return ans;
+
+        unordered_map<int, int> myMap;
+        size_t i = 0;
+        for (; i < nums.size(); i++) {
+            if (myMap.find(target - nums[i]) != myMap.end()) {
                 break;
+            } else {
+                myMap[nums[i]] = i;
             }
-            map[nums[i]] = i;
         }
+        vector<int> ans;
+        ans.push_back(myMap[target - nums[i]]);
+        ans.push_back(i);
         return ans;
     }
 };

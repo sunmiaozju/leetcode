@@ -54,6 +54,38 @@ private:
     stack<int> ss;
     stack<int> ss_min;
 
+    // public:
+    //     MinStack()
+    //     {
+    //     }
+
+    //     void push(int x)
+    //     {
+    //         ss.push(x);
+    //         if (ss_min.empty() || x <= getMin()) {
+    //             ss_min.push(x);
+    //         }
+    //     }
+
+    //     void pop()
+    //     {
+    //         if (!ss_min.empty() && ss.top() == getMin()) {
+    //             ss_min.pop();
+    //         }
+    //         ss.pop();
+    //     }
+
+    //     int top()
+    //     {
+    //         return ss.top();
+    //     }
+
+    //     int getMin()
+    //     {
+    //         return ss_min.top();
+    //     }
+    // };
+
 public:
     MinStack()
     {
@@ -62,14 +94,14 @@ public:
     void push(int x)
     {
         ss.push(x);
-        if (ss_min.empty() || x <= getMin()) {
+        if (ss_min.empty() || x <= ss_min.top()) {
             ss_min.push(x);
         }
     }
 
     void pop()
     {
-        if (!ss_min.empty() && ss.top() == getMin()) {
+        if (!ss_min.empty() && ss.top() == ss_min.top()) {
             ss_min.pop();
         }
         ss.pop();

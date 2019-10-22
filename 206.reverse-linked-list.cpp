@@ -69,13 +69,33 @@ public:
         //     pre.next->next = tmp;
         // }
         // return pre.next;
-        if (head == NULL || head->next == NULL) {
+
+        // if (head == NULL || head->next == NULL) {
+        //     return head;
+        // }
+        // ListNode* ans = reverseList(head->next);
+        // head->next->next = head;
+        // head->next = NULL;
+        // return ans;
+
+        // 迭代循环
+        // ListNode *pre = new ListNode(0), *cur = head, *tmp;
+        // while (cur != NULL) {
+        //     tmp = pre->next;
+        //     pre->next = cur;
+        //     cur = cur->next;
+        //     pre->next->next = tmp;
+        // }
+        // return pre->next;
+
+        // 递归
+        if (!head || !head->next) {
             return head;
         }
-        ListNode* ans = reverseList(head->next);
+        ListNode* item = reverseList(head->next);
         head->next->next = head;
         head->next = NULL;
-        return ans;
+        return item;
     }
 };
 // @lc code=end
