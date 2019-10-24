@@ -59,24 +59,36 @@ class Solution {
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums)
     {
-        if (nums.empty()) {
+        // if (nums.empty()) {
+        //     return NULL;
+        // }
+        // return sortBST(nums, 0, nums.size());
+        return helpers(nums, 0, nums.size() - 1);
+    }
+    TreeNode* helpers(vector<int>& nums, int ll, int rr)
+    {
+        if (ll > rr) {
             return NULL;
         }
-        return sortBST(nums, 0, nums.size());
+        int mid = ll + (rr - ll) / 2;
+        TreeNode* root = new TreeNode(nums[mid]);
+        root->left = helpers(nums, ll, mid - 1);
+        root->right = helpers(nums, mid + 1, rr);
+        return root;
     }
 
-    TreeNode* sortBST(vector<int>& nums, int left, int right)
-    {
-        int index = left + ((right - left) >> 1);
-        TreeNode* root_node = new TreeNode(nums[index]);
-        if (left < index) {
-            root_node->left = sortBST(nums, left, index);
-        }
-        if (index + 1 < right) {
-            root_node->right = sortBST(nums, index + 1, right);
-        }
-        return root_node;
-    }
+    // TreeNode* sortBST(vector<int>& nums, int left, int right)
+    // {
+    //     int index = left + ((right - left) >> 1);
+    //     TreeNode* root_node = new TreeNode(nums[index]);
+    //     if (left < index) {
+    //         root_node->left = sortBST(nums, left, index);
+    //     }
+    //     if (index + 1 < right) {
+    //         root_node->right = sortBST(nums, index + 1, right);
+    //     }
+    //     return root_node;
+    // }
 };
 
 // int main(int argc, const char** argv)

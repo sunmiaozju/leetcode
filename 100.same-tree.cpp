@@ -61,7 +61,7 @@
 
 using namespace std;
 
-//   Definition for a binary tree node.
+// //   Definition for a binary tree node.
 // struct TreeNode {
 //     int val;
 //     TreeNode* left;
@@ -114,10 +114,18 @@ public:
         // }
         // return true;
 
-        if (p == q) {
+        // if (p == q) {
+        //     return true;
+        // } else {
+        //     return p && q && p->val == q->val && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+        // }
+
+        if (!p && !q) {
             return true;
-        } else {
-            return p && q && p->val == q->val && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+        } else if ((p && !q) || (q && !p)) {
+            return false;
         }
+
+        return p->val == q->val && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
 };

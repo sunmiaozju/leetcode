@@ -58,32 +58,32 @@ public:
     int maxDepth(TreeNode* root)
     {
         //递归版本
-        // if (root == NULL) {
-        //     return 0;
-        // }
-        // return max(maxDepth(root->left), maxDepth(root->right)) + 1;
-
-        // 非递归版本：广度优先遍历
-        if (!root) {
+        if (root == NULL) {
             return 0;
         }
-        queue<TreeNode*> q;
-        TreeNode* node;
-        q.push(root);
-        int depth = 0;
-        while (int num = q.size()) {
-            depth++;
-            for (size_t i = 0; i < num; i++) {
-                node = q.front();
-                q.pop();
-                if (node->left) {
-                    q.push(node->left);
-                }
-                if (node->right) {
-                    q.push(node->right);
-                }
-            }
-        }
-        return depth;
+        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+
+        // 非递归版本：广度优先遍历
+        // if (!root) {
+        //     return 0;
+        // }
+        // queue<TreeNode*> q;
+        // TreeNode* node;
+        // q.push(root);
+        // int depth = 0;
+        // while (int num = q.size()) {
+        //     depth++;
+        //     for (size_t i = 0; i < num; i++) {
+        //         node = q.front();
+        //         q.pop();
+        //         if (node->left) {
+        //             q.push(node->left);
+        //         }
+        //         if (node->right) {
+        //             q.push(node->right);
+        //         }
+        //     }
+        // }
+        // return depth;
     }
 };
