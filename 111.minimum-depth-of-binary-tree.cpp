@@ -82,12 +82,23 @@ public:
         //     }
         // }
         // return height;
-
-        // 递归解法
-        if (root == NULL) {
+        if (!root) {
             return 0;
+        } else if (root->left && root->right) {
+            return min(minDepth(root->left), minDepth(root->right)) + 1;
+        } else if (root->left) {
+            return minDepth(root->left) + 1;
+        } else if (root->right) {
+            return minDepth(root->right) + 1;
+        } else {
+            return 1;
         }
-        int L = minDepth(root->left), R = minDepth(root->right);
-        return 1 + (min(L, R) ? min(L, R) : max(R, L));
+
+        //     // 递归解法
+        //     if (root == NULL) {
+        //         return 0;
+        //     }
+        //     int L = minDepth(root->left), R = minDepth(root->right);
+        //     return 1 + (min(L, R) ? min(L, R) : max(R, L));
     }
 };

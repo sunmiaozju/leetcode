@@ -38,28 +38,86 @@
  */
 
 // @lc code=start
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+#include <iostream>
+
+using namespace std;
+
+// struct ListNode {
+//     int val;
+//     ListNode* next;
+//     ListNode(int x)
+//         : val(x)
+//         , next(NULL)
+//     {
+//     }
+// };
+
+// struct TreeNode {
+//     int val;
+//     TreeNode* left;
+//     TreeNode* right;
+//     TreeNode(int x)
+//         : val(x)
+//         , left(NULL)
+//         , right(NULL)
+//     {
+//     }
+// };
+
 class Solution {
 public:
-    TreeNode* sortedListToBST(ListNode* head) {
-        
-    }
-};
-// @lc code=end
+    TreeNode* sortedListToBST(ListNode* head)
+    {
 
+        // ListNode* cur = head;
+        // int count = 0;
+        // while (cur) {
+        //     cur = cur->next;
+        //     count++;
+        // }
+        // return help(head, 0, count - 1);
+
+        // 快慢指针
+        if (!head) {
+            return NULL;
+        }
+        if (!head->next) {
+            TreeNode* ans = new TreeNode(head->val);
+            return ans;
+        }
+        ListNode *slow = head, *fast = head, *pre;
+        while (fast && fast->next) {
+            pre = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        pre->next = NULL;
+        TreeNode* root = new TreeNode(slow->val);
+        root->right = sortedListToBST(slow->next);
+        root->left = sortedListToBST(head);
+        return root;
+    }
+    // TreeNode* help(ListNode* head, int ll, int rr)
+    // {
+    //     if (rr < ll) {
+    //         return NULL;
+    //     }
+    //     int mid = ll + (rr - ll) / 2;
+    //     ListNode* cur = head;
+    //     int count = ll;
+    //     while (cur) {
+    //         if (count == mid) {
+    //             break;
+    //         }
+    //         cur = cur->next;
+    //         count++;
+    //     }
+    //     TreeNode* root = new TreeNode(cur->val);
+    //     root->left = help(head, ll, count - 1);
+    //     root->right = help(cur->next, count + 1, rr);
+    //     return root;
+    // }
+};
+
+;
+// @lc code=end

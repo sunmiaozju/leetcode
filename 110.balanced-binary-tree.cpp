@@ -74,16 +74,30 @@ class Solution {
 public:
     bool isBalanced(TreeNode* root)
     {
-        return isBalancedBst(root) >= 0;
+        // return isBalancedBst(root) >= 0;
+        return help(root) == -2 ? false : true;
     }
-
-    int isBalancedBst(TreeNode* root)
+    int help(TreeNode* root)
     {
-        if (root == NULL) {
+        if (!root) {
             return 0;
         }
-        int left = isBalancedBst(root->left);
-        int right = isBalancedBst(root->right);
-        return abs(left - right) <= 1 ? max(left, right) + 1 : -9;
+        int left = help(root->left);
+        int right = help(root->right);
+        if (abs(left - right) > 1 || left == -2 || right == -2) {
+            return -2;
+        } else {
+            return max(left, right) + 1;
+        }
     }
+
+    // int isBalancedBst(TreeNode* root)
+    // {
+    //     if (root == NULL) {
+    //         return 0;
+    //     }
+    //     int left = isBalancedBst(root->left);
+    //     int right = isBalancedBst(root->right);
+    //     return abs(left - right) <= 1 ? max(left, right) + 1 : -9;
+    // }
 };
