@@ -69,18 +69,19 @@
 
 //   Definition for singly-linked list.
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-// struct ListNode {
-//     int val;
-//     ListNode* next;
-//     ListNode(int x)
-//         : val(x)
-//         , next(NULL)
-//     {
-//     }
-// };
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x)
+        : val(x)
+        , next(NULL)
+    {
+    }
+};
 
 class Solution {
 public:
@@ -106,3 +107,17 @@ public:
         return false;
     }
 };
+int main(int argc, char** argv)
+{
+    // vector<int> nums;
+    // nums.push_back(2);
+    // nums.push_back(2);
+    // nums.push_back(3);
+    // nums.push_back(2);
+    // nums.push_back(2);
+    Solution s;
+    // int num = s.singleNumber(nums);
+    // std::cout << num << std::endl;
+
+    return 0;
+}

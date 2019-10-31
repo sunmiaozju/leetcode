@@ -45,11 +45,47 @@
  */
 
 // @lc code=start
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 class Solution {
 public:
-    int numDecodings(string s) {
-        
+    int numDecodings(string s)
+    {
+        // ?????????
+        // if (s.size() == 0 || s[0] == '0') {
+        //     return 0;
+        // }
+        // if (s.size() == 1) {
+        //     return 1;
+        // }
+        // if (s.size() == 2 && (s[0] - '0') * 10 + (s[1] - '0') <= 26) {
+        //     if (s[1] == '0') {
+        //         return 1;
+        //     } else {
+        //         return 2;
+        //     }
+        // }
+        // if ((s[0] - '0') * 10 + (s[1] - '0') > 26) {
+        //     return numDecodings(s.substr(1, s.size() - 1));
+        // }
+        // return numDecodings(s.substr(1, s.size() - 1)) + numDecodings(s.substr(2, s.size() - 2));
+        if (s.empty() || s[0] == '0') {
+            return 0;
+        }
+        int dp[s.size() + 1] = { 0 };
+        dp[0] = 1;
+        dp[1] = 1;
+        for (size_t i = 1; i < s.size(); i++) {
+            dp[i + 1] = (s[i] == '0') ? 0 : dp[i];
+            if (i > 0 && (s[i - 1] == '1' || s[i - 1] == '2' && s[i] <= '6')) {
+                dp[i + 1] += dp[i - 1];
+            }
+        }
+        return dp[s.size()];
     }
 };
-// @lc code=end
 
+// @lc code=end

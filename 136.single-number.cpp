@@ -58,9 +58,15 @@ public:
         // }
         // return map.begin()->first;
 
-        int ans = nums[0];
-        for (size_t i = 1; i < nums.size(); i++) {
-            ans = ans ^ nums[i];
+        // int ans = nums[0];
+        // for (size_t i = 1; i < nums.size(); i++) {
+        //     ans = ans ^ nums[i];
+        // }
+        // return ans;
+
+        int ans = 0;
+        for (size_t i = 0; i < nums.size(); i++) {
+            ans ^= nums[i];
         }
         return ans;
     }

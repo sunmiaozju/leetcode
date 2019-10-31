@@ -50,11 +50,20 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices)
     {
-        int min = INT_MAX, max = -INT_MAX;
-        for (size_t i = 1; i < prices.size(); i++) {
-            min = std::min(min, prices[i - 1]);
-            max = std::max(max, prices[i] - min);
+        // int min = INT_MAX, max = -INT_MAX;
+        // for (size_t i = 1; i < prices.size(); i++) {
+        //     min = std::min(min, prices[i - 1]);
+        //     max = std::max(max, prices[i] - min);
+        // }
+        // return std::max(max, 0);
+        if (prices.empty()) {
+            return 0;
         }
-        return std::max(max, 0);
+        int ans = 0, min_num = prices[0];
+        for (size_t i = 1; i < prices.size(); i++) {
+            ans = std::max(ans, prices[i] - min_num);
+            min_num = min(min_num, prices[i]);
+        }
+        return ans;
     }
 };

@@ -55,6 +55,8 @@
 
 // @lc code=start
 
+#include <bitset>
+#include <cmath>
 #include <iostream>
 #include <vector>
 
@@ -64,6 +66,18 @@ class Solution {
 public:
     vector<int> grayCode(int n)
     {
+        vector<int> nodes(pow(2, n), 0);
+        if (n == 0) {
+            return nodes;
+        }
+        vector<int> tmp = grayCode(n - 1);
+        for (size_t i = 0; i < nodes.size() / 2; i++) {
+            nodes[i] = tmp[i];
+        }
+        for (size_t i = nodes.size() / 2; i < nodes.size(); i++) {
+            nodes[i] = pow(2, n - 1) + tmp[2 * tmp.size() - 1 - i];
+        }
+        return nodes;
     }
 };
 // @lc code=end

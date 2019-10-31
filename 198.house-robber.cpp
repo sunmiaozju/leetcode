@@ -53,13 +53,24 @@ class Solution {
 public:
     int rob(vector<int>& nums)
     {
-        int pre = 0, pre_pre = 0;
-        for (size_t i = 0; i < nums.size(); i++) {
-            int tmp = max(pre_pre + nums[i], pre);
-            pre_pre = pre;
-            pre = tmp;
+        // int pre = 0, pre_pre = 0;
+        // for (size_t i = 0; i < nums.size(); i++) {
+        //     int tmp = max(pre_pre + nums[i], pre);
+        //     pre_pre = pre;
+        //     pre = tmp;
+        // }
+        // return pre;
+
+        if (nums.size() < 3) {
+            return nums.empty() ? 0 : nums.size() == 1 ? nums[0] : max(nums[0], nums[1]);
         }
-        return pre;
+        int dp[nums.size()];
+        dp[0] = nums[0];
+        dp[1] = max(nums[1], nums[0]);
+        for (size_t i = 2; i < nums.size(); i++) {
+            dp[i] = max(nums[i] + dp[i - 2], dp[i - 1]);
+        }
+        return dp[nums.size() - 1];
     }
     // int rob(vector<int>& nums, int left, int right)
     // {

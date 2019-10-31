@@ -12,6 +12,7 @@
         "*.tcc": "cpp",
         "deque": "cpp",
         "unordered_set": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "bitset": "cpp"
     }
 }

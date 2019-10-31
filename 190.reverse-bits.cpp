@@ -68,40 +68,52 @@ class Solution {
 public:
     uint32_t reverseBits(uint32_t n)
     {
+        // // uint32_t ans = 0;
+        // // int nums = 0;
+        // // while (nums < 32) {
+        // //     int item = n % 2;
+        // //     ans = ans * 2 + item;
+        // //     n /= 2;
+        // //     nums++;
+        // // }
+        // // return ans;
+
+        // int table[16] = { 0,
+        //     8,
+        //     4,
+        //     12,
+        //     2,
+        //     10,
+        //     6,
+        //     14,
+        //     1,
+        //     9,
+        //     5,
+        //     13,
+        //     3,
+        //     11,
+        //     7,
+        //     15 };
+
         // uint32_t ans = 0;
-        // int nums = 0;
-        // while (nums < 32) {
-        //     int item = n % 2;
-        //     ans = ans * 2 + item;
-        //     n /= 2;
-        //     nums++;
+        // uint32_t msk = 0x000f;
+        // for (size_t i = 0; i < 8; i++) {
+        //     ans = ans << 4;
+        //     int num = n & msk;
+        //     ans |= table[num];
+        //     n = n >> 4;
         // }
         // return ans;
 
-        int table[16] = { 0,
-            8,
-            4,
-            12,
-            2,
-            10,
-            6,
-            14,
-            1,
-            9,
-            5,
-            13,
-            3,
-            11,
-            7,
-            15 };
-
         uint32_t ans = 0;
-        uint32_t msk = 0x000f;
-        for (size_t i = 0; i < 8; i++) {
-            ans = ans << 4;
-            int num = n & msk;
-            ans |= table[num];
-            n = n >> 4;
+        uint32_t mask = 1;
+        int count = 32;
+        while (count--) {
+            ans = ans << 1;
+            if (mask & n) {
+                ans += 1;
+            }
+            n = n >> 1;
         }
         return ans;
     }

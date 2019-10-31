@@ -91,6 +91,14 @@ public:
             ans++;
         }
         return ans;
+
+        // int table[16] = { 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4 };
+        // int ans = 0;
+        // while (n) {
+        //     ans += table[n & 15];
+        //     n = n >> 4;
+        // }
+        // return ans;
     }
 };
 // @lc code=end
