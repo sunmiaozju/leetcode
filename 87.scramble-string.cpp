@@ -78,6 +78,7 @@
  * Output: false
  * 
  */
+#include <algorithm>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -87,7 +88,53 @@ class Solution {
 public:
     bool isScramble(string s1, string s2)
     {
+        // 递归解法，注意如果子字符串的字母不一样，要提前处理加快速度
+        // return help(s1, s2, 0, 0, s1.length());
+        // dp解法
+        int n = s1.length();
+        vector<vector<vector<bool>>> dp(n, vector<vector<bool>>(n, vector<bool>(n + 1, false)));
+        for (size_t i = 0; i < n; i++) {
+            for (size_t j = 0; j < n; j++) {
+                dp[i][j][1] = s1[i] == s2[j];
+            }
+        }
+        for (size_t len = 2; len <= n; len++) {
+            for (size_t i = 0; i <= n - len; i++) {
+                for (size_t j = 0; j <= n - len; j++) {
+                    for (size_t k = 0; k < len - 1; k++) {
+                        if (dp[i][j][k + 1] && dp[i + k + 1][j + k + 1][len - k - 1] || dp[i][j + len - k - 1][k + 1] && dp[i + k + 1][j][len - k - 1]) {
+                            dp[i][j][len] = true;
+                        }
+                    }
+                }
+            }
+        }
+        return dp[0][0][n];
     }
+    // bool help(string& s1, string& s2, int l1, int l2, int length)
+    // {
+    //     if (length == 1) {
+    //         return s1[l1] == s2[l2];
+    //     }
+    //     string str1 = s1.substr(l1, length);
+    //     string str2 = s2.substr(l2, length);
+    //     sort(str1.begin(), str1.end());
+    //     sort(str2.begin(), str2.end());
+    //     if (str1 != str2)
+    //         return false;
+
+    //     for (int i = 0; i < length - 1; i++) {
+    //         bool result1 = help(s1, s2, l1, l2, i + 1) && help(s1, s2, l1 + i + 1, l2 + i + 1, length - i - 1);
+    //         if (result1) {
+    //             return true;
+    //         }
+    //         bool result2 = help(s1, s2, l1, l2 + length - i - 1, i + 1) && help(s1, s2, l1 + i + 1, l2, length - i - 1);
+    //         if (result2) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 };
 
 // @lc code=end
