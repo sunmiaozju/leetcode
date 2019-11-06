@@ -75,11 +75,20 @@ public:
         // }
 
         // 非递归解法
+        // string ans;
+        // while (n > 0) {
+        //     ans = char('A' + (n - 1) % 26) + ans;
+        //     n = (n - 1) / 26;
+        // }
+        // return ans;
+
         string ans;
-        while (n > 0) {
-            ans = char('A' + (n - 1) % 26) + ans;
-            n = (n - 1) / 26;
+        if (n - 1 < 26) {
+            ans.push_back(n - 1 + 'A');
+            return ans;
         }
+        ans = ans + convertToTitle((n - 1) / 26);
+        ans.push_back((n - 1) % 26 + 'A');
         return ans;
     }
 };

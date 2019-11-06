@@ -13,6 +13,8 @@
         "deque": "cpp",
         "unordered_set": "cpp",
         "vector": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "iostream": "cpp",
+        "type_traits": "cpp"
     }
 }

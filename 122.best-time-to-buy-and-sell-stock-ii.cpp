@@ -79,6 +79,14 @@ public:
         // }
         // return on ? ans + prices[prices.size() - 1] - in_price : ans;
 
+        // int ans = 0;
+        // for (size_t i = 1; i < prices.size(); i++) {
+        //     if (prices[i] > prices[i - 1]) {
+        //         ans += prices[i] - prices[i - 1];
+        //     }
+        // }
+        // return ans;
+
         int ans = 0;
         for (size_t i = 1; i < prices.size(); i++) {
             if (prices[i] > prices[i - 1]) {

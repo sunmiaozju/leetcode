@@ -46,12 +46,39 @@ public:
     int majorityElement(vector<int>& nums)
     {
 
-        unordered_map<int, int> map;
-        for (size_t i = 0; i < nums.size(); i++) {
-            if (++map[nums[i]] > nums.size() / 2) {
-                return nums[i];
+        // unordered_map<int, int> map;
+        // for (size_t i = 0; i < nums.size(); i++) {
+        //     if (++map[nums[i]] > nums.size() / 2) {
+        //         return nums[i];
+        //     }
+        // }
+        // return -1;
+
+        // sort(nums.begin(), nums.end());
+        // return nums[nums.size() / 2];
+
+        // int n = nums.size(), candidate, counter;
+        // srand(unsigned(time(NULL)));
+        // while (true) {
+        //     candidate = nums[rand() % n], counter = 0;
+        //     for (int num : nums) {
+        //         if (num == candidate) {
+        //             counter++;
+        //         }
+        //     }
+        //     if (counter > n / 2) {
+        //         break;
+        //     }
+        // }
+        // return candidate;
+
+        int counter = 0, majority;
+        for (int num : nums) {
+            if (!counter) {
+                majority = num;
             }
+            counter += num == majority ? 1 : -1;
         }
-        return -1;
+        return majority;
     }
 };
