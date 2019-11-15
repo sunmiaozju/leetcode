@@ -45,11 +45,37 @@
  */
 
 // @lc code=start
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
-    int findMinArrowShots(vector<vector<int>>& points) {
-        
+    int findMinArrowShots(vector<vector<int>>& points)
+    {
+        if (points.empty())
+            return 0;
+
+        sort(points.begin(), points.end(), [](auto& a, auto& b) {
+            if (a[0] == b[0]) {
+                return a[1] <= b[1];
+            } else {
+                return a[0] <= b[0];
+            }
+        });
+        int ans = 0;
+
+        for (size_t i = 0, next = 1; next < points.size(); next++) {
+            if (points[i][1] < points[next][0]) {
+                ans++;
+                i = next;
+            } else {
+                points[i][1] = min(points[next][1], points[i][1]);
+            }
+        }
+        return ans + 1;
     }
 };
 // @lc code=end
-

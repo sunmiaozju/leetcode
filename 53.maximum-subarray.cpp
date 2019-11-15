@@ -83,32 +83,62 @@ public:
         // return sum_max;
 
         // ??????
-        if (nums.empty()) {
-            return 0;
-        }
-        int max, rmax, lmax, sum;
-        maxSubArray(nums, 0, nums.size() - 1, max, lmax, rmax, sum);
-        return max;
-    }
+        // if (nums.empty()) {
+        //     return 0;
+        // }
+        // int max, rmax, lmax, sum;
+        // maxSubArray(nums, 0, nums.size() - 1, max, lmax, rmax, sum);
+        // return max;
 
-    void maxSubArray(vector<int>& nums, int l, int r, int& max, int& lmax, int& rmax, int& sum)
+        // int ans = INT_MIN, curSum = 0;
+        // for (auto num : nums) {
+        //     curSum = max(curSum + num, num);
+        //     ans = max(ans, curSum);
+        // }
+        // return ans;
+
+        return help(nums, 0, nums.size() - 1);
+    }
+    int help(vector<int>& nums, int left, int right)
     {
-        if (l == r) {
-            max = lmax = rmax = sum = nums[l];
-            return;
+        if (left >= right) {
+            return nums[left];
         }
-
-        int m = r + ((l - r) >> 1);
-        int max_l, lmax_l, rmax_l, sum_l;
-        int max_r, lmax_r, rmax_r, sum_r;
-
-        maxSubArray(nums, l, m, max_l, lmax_l, rmax_l, sum_l);
-        maxSubArray(nums, m + 1, r, max_r, lmax_r, rmax_r, sum_r);
-
-        max = std::max(rmax_l + lmax_r, std::max(max_l, max_r));
-        lmax = std::max(lmax_l, sum_l + lmax_r);
-        rmax = std::max(rmax_r, rmax_l + sum_r);
-        sum = sum_l + sum_r;
-        return;
+        int mid = left + ((right - left) >> 1);
+        int mleft = help(nums, left, mid - 1);
+        int mright = help(nums, mid + 1, right);
+        int mid_max = nums[mid];
+        int sum = nums[mid];
+        for (int i = mid - 1; i >= 0; i--) {
+            sum += nums[i];
+            mid_max = max(mid_max, sum);
+        }
+        sum = mid_max;
+        for (int i = mid + 1; i <= right; i++) {
+            sum += nums[i];
+            mid_max = max(mid_max, sum);
+        }
+        return max(max(mleft, mright), mid_max);
     }
+
+    // void maxSubArray(vector<int>& nums, int l, int r, int& max, int& lmax, int& rmax, int& sum)
+    // {
+    //     if (l == r) {
+    //         max = lmax = rmax = sum = nums[l];
+    //         return;
+    //     }
+
+    //     int m = r + ((l - r) >> 1);
+    //     int max_l, lmax_l, rmax_l, sum_l;
+    //     int max_r, lmax_r, rmax_r, sum_r;
+
+    //     maxSubArray(nums, l, m, max_l, lmax_l, rmax_l, sum_l);
+    //     maxSubArray(nums, m + 1, r, max_r, lmax_r, rmax_r, sum_r);
+
+    //     max = std::max(rmax_l + lmax_r, std::max(max_l, max_r));
+    //     lmax = std::max(lmax_l, sum_l + lmax_r);
+    //     rmax = std::max(rmax_r, rmax_l + sum_r);
+    //     sum = sum_l + sum_r;
+    //     return;
+    // }
 };

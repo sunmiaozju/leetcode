@@ -44,10 +44,22 @@ class Solution {
 public:
     int mySqrt(int x)
     {
-        double num = 1.0 * x / 2;
-        while (!(num * num < x + 0.5 && num * num > x - 0.5)) {
-            num = (num + x / num) / 2;
+        // double num = 1.0 * x / 2;
+        // while (!(num * num < x + 0.5 && num * num > x - 0.5)) {
+        //     num = (num + x / num) / 2;
+        // }
+        // return int(num);
+        if (x <= 1)
+            return x;
+        int left = 0, right = x;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (x / mid >= mid) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
         }
-        return int(num);
+        return left - 1;
     }
 };
