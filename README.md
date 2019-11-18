@@ -2,7 +2,7 @@
 
 ---
 
-- [二分搜索法总结](./binary_search.md)
+- [二分搜索法总结](./docs/binary_search.md)
 
 ---
 
