@@ -1,7 +1,5 @@
 # leetcode
 
----
-
 [TOC]
 
 ---
