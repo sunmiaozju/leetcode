@@ -2,11 +2,11 @@
 
 ---
 
-- [二分搜索法总结](./docs/binary_search.md)
+[TOC]
 
 ---
 
-[TOC]
+- [二分搜索法总结](./docs/binary_search.md)
 
 ---
 
