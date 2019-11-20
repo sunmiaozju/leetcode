@@ -109,6 +109,10 @@ o(n)time o(1)space 的算法是找到每一排循环的规律，是按照一定�
 
 双指针，两边开始便利，但是要注意边界条件：如果一个字母也没有
 
+## 127. word ladder
+
+BFS 查找，主要是要判断好只相差一个字母的两个字符串，如果只相差一个字母，就认为他们在图上是相邻的。
+
 ## 136. single number
 
 使用异或进行处理，异或满足交换率和结合率，可以将两个相同大小的数字消掉。
@@ -164,6 +168,11 @@ o(n)time o(1)space 的算法是找到每一排循环的规律，是按照一定�
 ## 278. first bad version
 
 二分查找
+
+## 279. perfect squares
+
+动态规划。将原问题思考为最初始的简单问题的汇总，这里就是从 n=1 开始，逐渐增加 n,递推关系为 dp[i] = min(dp[i - j * j] + 1, dp[i]);也可以使用 BFS，思路就是假象有一个 graph，里面每个节点如果满足 i=j+squares 即代表二者相连（Node j is connected to node i via an edge if  
+and only if either j = i + (a perfect square number) or i = j + (a perfect square number).）。使用广度优先便利即可以找到最短路径。
 
 ## 345. reverse vowels of a string
 
@@ -221,6 +230,10 @@ hashmap 可以得到计数与元素的映射，然后可以使用桶排序或者
 
 双指针，首先正常判断是不是回文字符串，在出现两个字符不一致的情况下，继续判断里面的字符串是不是会问字符串，注意有交叉两种情况
 
+## 695. max-area-of-island
+
+这道题目类似于 1091 这道题目，不同之处在于这道题目仅有四个方向可以拓展。至于每一个子区域遍历一遍，可以使用 BFS 也可以使用 DFS。BFS 可以求出最短路径，而 DFS 对于求出可达性会更快一些。
+
 ## 744. find smallest letter greater than target
 
 二分查找法
@@ -228,3 +241,7 @@ hashmap 可以得到计数与元素的映射，然后可以使用桶排序或者
 ## 763. partition label
 
 构建一个 hash 表，记录每一个字母最后出现的位置，然后再遍历一边字符串，定义一个变量表示当前出现的字符的最右边的边界，如果当前索引等于当前出现字符的最右边边界，那么就认为可以切割了
+
+## 1091. shortest path in binary matrix
+
+BFS。注意要对八个可能方向都要添加进队列，可能会访问回以前遍历过的地方，那么就如果是更短的路径，就要更新，如果不是更短的路径，就不要更新。
