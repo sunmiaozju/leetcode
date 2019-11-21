@@ -46,24 +46,49 @@ class Solution {
 public:
     vector<string> letterCombinations(string digits)
     {
-        if (digits.empty()) {
-            return vector<string>();
-        }
+        // if (digits.empty()) {
+        //     return vector<string>();
+        // }
+        // vector<string> ans;
+        // vector<string> table{ "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        // help(ans, digits, "", 0, table);
+        // return ans;
+
         vector<string> ans;
+        if (digits.empty()) {
+            return ans;
+        }
+
         vector<string> table{ "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
-        help(ans, digits, "", 0, table);
+        string path;
+        help(digits, path, ans, table);
         return ans;
     }
-    void help(vector<string>& ans, string& digits, string str, int level, vector<string>& table)
+    void help(string& digits, string& path, vector<string>& paths, vector<string>& table)
     {
-        if (level == digits.length()) {
-            ans.push_back(str);
+        if (path.size() == digits.size()) {
+            paths.push_back(path);
             return;
         }
-        string s = table[digits[level] - '0'];
-        for (size_t i = 0; i < s.size(); i++) {
-            help(ans, digits, str + s[i], level + 1, table);
+
+        string items = table[digits[path.size()] - '0'];
+        for (size_t i = 0; i < items.size(); i++) {
+            path.push_back(items[i]);
+            help(digits, path, paths, table);
+            path.pop_back();
         }
     }
+
+    // void help(vector<string>& ans, string& digits, string str, int level, vector<string>& table)
+    // {
+    //     if (level == digits.length()) {
+    //         ans.push_back(str);
+    //         return;
+    //     }
+    //     string s = table[digits[level] - '0'];
+    //     for (size_t i = 0; i < s.size(); i++) {
+    //         help(ans, digits, str + s[i], level + 1, table);
+    //     }
+    // }
 };
 // @lc code=end
