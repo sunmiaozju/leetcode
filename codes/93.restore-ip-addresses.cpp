@@ -26,11 +26,45 @@
  */
 
 // @lc code=start
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
-    vector<string> restoreIpAddresses(string s) {
-        
+    vector<string> restoreIpAddresses(string s)
+    {
+        vector<string> ans;
+        string path;
+        int index = 0;
+        help(ans, path, s, index, 0);
+        return ans;
+    }
+    void help(vector<string>& paths, string& path, string& s, int& index, int level)
+    {
+        if (level == 4) {
+            if (path.size() == s.size() + 4) {
+                path.pop_back();
+                paths.push_back(path);
+                path.push_back('.');
+            }
+            return;
+        }
+        for (int i = 1; i <= 3; i++) {
+            string tmp = s.substr(index, i);
+            if (atoi(tmp.c_str()) > 255 || i != tmp.size() || tmp.size() > 1 && tmp[0] == '0') {
+                return;
+            }
+            path = path + s.substr(index, i) + ".";
+            index += i;
+            help(paths, path, s, index, level + 1);
+            index -= i;
+            path = path.substr(0, path.size() - 1 - i);
+        }
     }
 };
-// @lc code=end
 
+// @lc code=end
