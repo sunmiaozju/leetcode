@@ -58,20 +58,44 @@ public:
         // }
         // return ans;
 
-        vector<vector<int>> subs;
-        vector<int> sub;
-        help(subs, sub, nums, 0);
-        return subs;
+        // vector<vector<int>> subs;
+        // vector<int> sub;
+        // help(subs, sub, nums, 0);
+        // return subs;
+
+        vector<vector<int>> ans;
+        vector<int> path;
+        help(ans, path, nums);
+        return ans;
     }
-    void help(vector<vector<int>>& subs, vector<int>& sub, vector<int>& nums, int pos)
+
+    void help(vector<vector<int>>& paths, vector<int>& path, vector<int>& nums)
     {
-        subs.push_back(sub);
-        for (size_t i = pos; i < nums.size(); i++) {
-            sub.push_back(nums[i]);
-            help(subs, sub, nums, i + 1);
-            sub.pop_back();
+        // for (size_t i = 0; i < path.size(); i++) {
+        //     cout << path[i] << " ";
+        // }
+        // cout << endl;
+
+        paths.push_back(path);
+        for (size_t i = 0; i < nums.size(); i++) {
+            if (!path.empty() && path[path.size() - 1] >= nums[i]) {
+                continue;
+            }
+            path.push_back(nums[i]);
+            help(paths, path, nums);
+            path.pop_back();
         }
     }
+
+    // void help(vector<vector<int>>& subs, vector<int>& sub, vector<int>& nums, int pos)
+    // {
+    //     subs.push_back(sub);
+    //     for (size_t i = pos; i < nums.size(); i++) {
+    //         sub.push_back(nums[i]);
+    //         help(subs, sub, nums, i + 1);
+    //         sub.pop_back();
+    //     }
+    // }
 };
 // int main(int argc, const char** argv)
 // {

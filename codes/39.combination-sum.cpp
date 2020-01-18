@@ -53,11 +53,45 @@
  */
 
 // @lc code=start
+
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+    {
+        vector<vector<int>> ans;
+        vector<int> path;
+        help(ans, path, candidates, target);
+        return ans;
+    }
+
+    void help(vector<vector<int>>& paths, vector<int>& path, vector<int>& candidates, int target)
+    {
+        int sum = 0;
+        for (size_t i = 0; i < path.size(); i++) {
+            sum += path[i];
+            if (sum > target) {
+                return;
+            }
+        }
+        if (sum == target) {
+            paths.push_back(path);
+            return;
+        }
+
+        for (size_t i = 0; i < candidates.size(); i++) {
+            if (!path.empty() && candidates[i] < path[path.size() - 1]) {
+                continue;
+            }
+
+            path.push_back(candidates[i]);
+            help(paths, path, candidates, target);
+            path.pop_back();
+        }
     }
 };
 // @lc code=end
-

@@ -33,12 +33,35 @@
  * 
  */
 
+#include <vector>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    vector<vector<int>> combine(int n, int k) {
-        
+    vector<vector<int>> combine(int n, int k)
+    {
+        vector<int> path;
+        vector<vector<int>> paths;
+        help(paths, path, n, k);
+        return paths;
+    }
+
+    void help(vector<vector<int>>& paths, vector<int>& path, int n, int k)
+    {
+        if (path.size() == k) {
+            paths.push_back(path);
+            return;
+        }
+
+        for (size_t i = 1; i <= n; i++) {
+            if (path.size() == 0 || path[path.size() - 1] < i) {
+                path.push_back(i);
+                help(paths, path, n, k);
+                path.pop_back();
+            }
+        }
     }
 };
 // @lc code=end
-

@@ -49,21 +49,47 @@ public:
         sort(nums.begin(), nums.end());
         vector<vector<int>> paths;
         vector<int> path;
-        help(nums, path, paths, 0);
+        vector<bool> visit(vector<bool>(nums.size(), false));
+        help(paths, path, nums, visit);
+        // help(nums, path, paths, 0);
         return paths;
     }
-    void help(vector<int>& nums, vector<int>& path, vector<vector<int>>& paths, int pos)
+
+    void help(vector<vector<int>>& paths, vector<int>& path, vector<int>& nums, vector<bool>& visit)
     {
+        for (size_t i = 0; i < path.size(); i++) {
+            cout << path[i] << "- ";
+        }
+        cout << endl;
+
         paths.push_back(path);
-        for (int i = pos; i < nums.size(); i++) {
-            if (i - 1 >= pos && nums[i] == nums[i - 1]) {
+        for (size_t i = 0; i < nums.size(); i++) {
+            if (i > 0 && !visit[i - 1] && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            if (!path.empty() && path[path.size() - 1] > nums[i] || visit[i]) {
                 continue;
             }
             path.push_back(nums[i]);
-            help(nums, path, paths, i + 1);
+            visit[i] = true;
+            help(paths, path, nums, visit);
             path.pop_back();
+            visit[i] = false;
         }
     }
+
+    // void help(vector<int>& nums, vector<int>& path, vector<vector<int>>& paths, int pos)
+    // {
+    //     paths.push_back(path);
+    //     for (int i = pos; i < nums.size(); i++) {
+    //         if (i - 1 >= pos && nums[i] == nums[i - 1]) {
+    //             continue;
+    //         }
+    //         path.push_back(nums[i]);
+    //         help(nums, path, paths, i + 1);
+    //         path.pop_back();
+    //     }
+    // }
 };
 
 // @lc code=end
