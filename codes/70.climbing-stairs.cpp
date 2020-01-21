@@ -42,19 +42,38 @@
  * 
  * 
  */
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     int climbStairs(int n)
     {
-        int a = 0, b = 1;
-        int cur = 1;
-        int c;
-        while (cur <= n) {
-            c = a + b;
-            a = b;
-            b = c;
-            cur++;
+        // int a = 0, b = 1;
+        // int cur = 1;
+        // int c;
+        // while (cur <= n) {
+        //     c = a + b;
+        //     a = b;
+        //     b = c;
+        //     cur++;
+        // }
+        // return c;
+        if (n < 3) {
+            return n;
         }
-        return c;
+
+        vector<int> dp(vector<int>(n + 1, 0));
+        dp[1] = 1;
+        dp[2] = 2;
+
+        for (size_t i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+            cout << dp[i] << " ";
+        }
+        return dp[n];
     }
 };

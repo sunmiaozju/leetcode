@@ -31,12 +31,59 @@
  * 
  */
 
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    vector<vector<string>> partition(string s) {
-        
+    typedef vector<string> v_str;
+
+    vector<v_str> partition(string s)
+    {
+        vector<v_str> ans;
+        vector<string> path;
+        help(ans, path, s, 0);
+        return ans;
+    }
+
+    void help(vector<v_str>& paths, vector<string>& path, string& s, int start_index)
+    {
+
+        if (start_index == s.size()) {
+            paths.push_back(path);
+            return;
+        }
+
+        for (size_t length = 1; start_index + length <= s.size(); length++) {
+            if (isPalindrome(s.substr(start_index, length))) {
+                path.push_back(s.substr(start_index, length));
+                help(paths, path, s, start_index + length);
+                path.pop_back();
+            }
+        }
+    }
+
+    bool isPalindrome(string s)
+    {
+        int left = 0, right = s.size() - 1;
+        while (left < right) {
+            if (s[left++] != s[right--]) {
+                return false;
+            }
+        }
+        return true;
     }
 };
-// @lc code=end
 
+// int main(int argc, const char** argv)
+// {
+//     Solution s;
+//     string ss("aab");
+//     s.partition(ss);
+//     return 0;
+// }
+// @lc code=end

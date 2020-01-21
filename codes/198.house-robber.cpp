@@ -45,6 +45,7 @@
  */
 
 // @lc code=start
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -61,14 +62,31 @@ public:
         // }
         // return pre;
 
-        if (nums.size() < 3) {
-            return nums.empty() ? 0 : nums.size() == 1 ? nums[0] : max(nums[0], nums[1]);
+        // if (nums.size() < 3) {
+        //     return nums.empty() ? 0 : nums.size() == 1 ? nums[0] : max(nums[0], nums[1]);
+        // }
+        // int dp[nums.size()];
+        // dp[0] = nums[0];
+        // dp[1] = max(nums[1], nums[0]);
+        // for (size_t i = 2; i < nums.size(); i++) {
+        //     dp[i] = max(nums[i] + dp[i - 2], dp[i - 1]);
+        // }
+        // return dp[nums.size() - 1];
+
+        if (nums.empty()) {
+            return 0;
+        } else if (nums.size() == 1) {
+            return nums[0];
+        } else if (nums.size() == 2) {
+            return max(nums[0], nums[1]);
         }
-        int dp[nums.size()];
+
+        vector<int> dp(vector<int>(nums.size(), 0));
         dp[0] = nums[0];
-        dp[1] = max(nums[1], nums[0]);
+        dp[1] = max(nums[0], nums[1]);
+
         for (size_t i = 2; i < nums.size(); i++) {
-            dp[i] = max(nums[i] + dp[i - 2], dp[i - 1]);
+            dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);
         }
         return dp[nums.size() - 1];
     }
