@@ -47,6 +47,7 @@
 // @lc code=start
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -54,7 +55,7 @@ class Solution {
 public:
     int numDecodings(string s)
     {
-        // ?????????
+        //
         // if (s.size() == 0 || s[0] == '0') {
         //     return 0;
         // }
@@ -72,16 +73,38 @@ public:
         //     return numDecodings(s.substr(1, s.size() - 1));
         // }
         // return numDecodings(s.substr(1, s.size() - 1)) + numDecodings(s.substr(2, s.size() - 2));
+
+        // 动态规划1
+        // if (s.empty() || s[0] == '0') {
+        //     return 0;
+        // }
+        // int dp[s.size() + 1] = { 0 };
+        // dp[0] = 1;
+        // dp[1] = 1;
+        // for (size_t i = 1; i < s.size(); i++) {
+        //     dp[i + 1] = (s[i] == '0') ? 0 : dp[i];
+        //     if (i > 0 && (s[i - 1] == '1' || s[i - 1] == '2' && s[i] <= '6')) {
+        //         dp[i + 1] += dp[i - 1];
+        //     }
+        // }
+        // return dp[s.size()];
+
+        // 动态规划2
         if (s.empty() || s[0] == '0') {
             return 0;
         }
-        int dp[s.size() + 1] = { 0 };
+        vector<int> dp(vector<int>(s.size() + 1, 0));
         dp[0] = 1;
         dp[1] = 1;
-        for (size_t i = 1; i < s.size(); i++) {
-            dp[i + 1] = (s[i] == '0') ? 0 : dp[i];
-            if (i > 0 && (s[i - 1] == '1' || s[i - 1] == '2' && s[i] <= '6')) {
-                dp[i + 1] += dp[i - 1];
+
+        for (size_t i = 2; i <= s.size(); i++) {
+            int num = stoi(s.substr(i - 2, 2));
+            int num_single = num % 10;
+            if (num_single != 0) {
+                dp[i] += dp[i - 1];
+            }
+            if (num >= 10 && num <= 26) {
+                dp[i] += dp[i - 2];
             }
         }
         return dp[s.size()];
