@@ -72,13 +72,30 @@ public:
         // }
         // return candidate;
 
-        int counter = 0, majority;
-        for (int num : nums) {
-            if (!counter) {
-                majority = num;
-            }
-            counter += num == majority ? 1 : -1;
-        }
-        return majority;
+        // int counter = 0, majority;
+        // for (int num : nums) {
+        //     if (!counter) {
+        //         majority = num;
+        //     }
+        //     counter += num == majority ? 1 : -1;
+        // }
+        // return majority;
+
+        // double n = nums.size();
+
+        // unordered_map<int, int> map;
+        // sort(nums.begin(), nums.end());
+
+        // for (int i = 0; i < nums.size(); i++) {
+        //     map[nums[i]]++;
+        //     if (map[nums[i]] >= n / 2.0) {
+        //         return nums[i];
+        //     }
+        // }
+
+        // return -1;
+
+        sort(nums.begin(), nums.end());
+        return nums[nums.size() / 2];
     }
 };

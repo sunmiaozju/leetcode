@@ -50,7 +50,10 @@
  * Output: "ZY"
  * 
  */
+#include <iostream>
+#include <sstream>
 #include <string>
+
 using namespace std;
 
 class Solution {
@@ -82,13 +85,29 @@ public:
         // }
         // return ans;
 
+        // string ans;
+        // if (n - 1 < 26) {
+        //     ans.push_back(n - 1 + 'A');
+        //     return ans;
+        // }
+        // ans = ans + convertToTitle((n - 1) / 26);
+        // ans.push_back((n - 1) % 26 + 'A');
+        // return ans;
+
         string ans;
-        if (n - 1 < 26) {
-            ans.push_back(n - 1 + 'A');
-            return ans;
+
+        while (n) {
+            n = n - 1;
+
+            char item = n % 26 + 'A';
+            stringstream stream;
+            stream << item;
+            string str = stream.str();
+            ans = str + ans;
+
+            n = n / 26;
         }
-        ans = ans + convertToTitle((n - 1) / 26);
-        ans.push_back((n - 1) % 26 + 'A');
-        return ans;
+
+        return ans == "" ? "A" : ans;
     }
 };

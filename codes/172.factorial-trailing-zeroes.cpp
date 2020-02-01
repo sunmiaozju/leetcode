@@ -40,11 +40,13 @@ class Solution {
 public:
     int trailingZeroes(int n)
     {
+        // return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+
         int ans = 0;
-        for (size_t i = 5; n / i; i *= 5) {
+
+        for (long i = 5; n / i; i *= 5) {
             ans = ans + n / i;
         }
-
         return ans;
     }
 };

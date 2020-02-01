@@ -72,27 +72,69 @@ public:
         // }
         // return ans;
 
+        // if (a.size() < b.size()) {
+        //     swap(a, b);
+        // }
+
+        // int m = a.size() - 1, n = b.size() - 1;
+        // while (m >= 0) {
+        //     if (n >= 0) {
+        //         b[n] &= 1;
+        //         a[m] += b[n];
+        //     }
+        //     if (a[m] > '1') {
+        //         a[m] -= 2;
+        //         if (m == 0) {
+        //             a = '1' + a;
+        //         } else {
+        //             a[m - 1]++;
+        //         }
+        //     }
+        //     m--;
+        //     n--;
+        // }
+        // return a;
+
         if (a.size() < b.size()) {
             swap(a, b);
         }
-
-        int m = a.size() - 1, n = b.size() - 1;
-        while (m >= 0) {
-            if (n >= 0) {
-                b[n] &= 1;
-                a[m] += b[n];
+        int up = 0;
+        int index1 = a.size() - 1, index2 = b.size() - 1;
+        while (index2 >= 0) {
+            int item = a[index1] - '0' + b[index2] - '0' + up;
+            if (item == 2) {
+                a[index1] = '0';
+                up = 1;
+            } else if (item == 0) {
+                a[index1] = '0';
+                up = 0;
+            } else if (item == 1) {
+                a[index1] = '1';
+                up = 0;
+            } else if (item == 3) {
+                a[index1] = '1';
+                up = 1;
             }
-            if (a[m] > '1') {
-                a[m] -= 2;
-                if (m == 0) {
-                    a = '1' + a;
-                } else {
-                    a[m - 1]++;
-                }
-            }
-            m--;
-            n--;
+            index1--;
+            index2--;
         }
-        return a;
+
+        if (up == 1) {
+            while (index1 >= 0) {
+                int item = a[index1] - '0' + up;
+                if (item == 2) {
+                    a[index1] = '0';
+                    up = 1;
+                } else if (item == 0) {
+                    a[index1] = '0';
+                    up = 0;
+                } else if (item == 1) {
+                    a[index1] = '1';
+                    up = 0;
+                }
+                index1--;
+            }
+        }
+        return up ? "1" + a : a;
     }
 };

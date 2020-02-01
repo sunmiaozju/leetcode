@@ -33,20 +33,33 @@ class Solution {
 public:
     int countPrimes(int n)
     {
-        vector<bool> isPrimes(n, true);
-        int ans = 0;
-        for (size_t i = 2; i < sqrt(n); ++i) {
-            if (isPrimes[i]) {
-                for (size_t j = i * i; j < n; j += i) {
-                    isPrimes[j] = false;
-                }
+        // vector<bool> isPrimes(n, true);
+        // int ans = 0;
+        // for (size_t i = 2; i < sqrt(n); ++i) {
+        //     if (isPrimes[i]) {
+        //         for (size_t j = i * i; j < n; j += i) {
+        //             isPrimes[j] = false;
+        //         }
+        //     }
+        // }
+        // for (size_t i = 2; i < n; i++) {
+        //     if (isPrimes[i]) {
+        //         ans++;
+        //     }
+        // }
+        // return ans;
+
+        vector<int> isPrime(n, true);
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (!isPrime[i]) {
+                continue;
+            }
+            count++;
+            for (int j = 2; j * i < n; j++) {
+                isPrime[i * j] = false;
             }
         }
-        for (size_t i = 2; i < n; i++) {
-            if (isPrimes[i]) {
-                ans++;
-            }
-        }
-        return ans;
+        return count;
     }
 };
