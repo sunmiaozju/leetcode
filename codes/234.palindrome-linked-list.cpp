@@ -101,6 +101,30 @@ public:
             slow = slow->next;
         }
         return true;
+
+        // stack<int> s;
+        // if (!head || !head->next) {
+        //     return true;
+        // }
+
+        // ListNode *slow = head, *fast = head;
+        // while (fast && fast->next) {
+        //     s.push(slow->val);
+        //     slow = slow->next;
+        //     fast = fast->next->next;
+        // }
+        // if (fast && !fast->next) {
+        //     slow = slow->next;
+        // }
+        // while (slow) {
+        //     if (slow->val != s.top()) {
+        //         return false;
+        //     }
+        //     s.pop();
+        //     slow = slow->next;
+        // }
+
+        // return true;
     }
 };
 // @lc code=end
