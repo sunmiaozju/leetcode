@@ -101,3 +101,23 @@ public:
     //     return abs(left - right) <= 1 ? max(left, right) + 1 : -9;
     // }
 };
+
+// class Solution {
+// public:
+//     bool isBalanced(TreeNode* root) {
+//         if(!root){
+//             return true;
+//         }
+//         if(isBalanced(root->left) && isBalanced(root->right) && abs(maxDepth(root->left) - maxDepth(root->right)) <= 1){
+//             return true;
+//         }
+//         return false;
+//     }
+
+//     int maxDepth(TreeNode* root){
+//         if(!root){
+//             return 0;
+//         }
+//         return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+//     }
+// };
