@@ -102,3 +102,33 @@ public:
         //     return 1 + (min(L, R) ? min(L, R) : max(R, L));
     }
 };
+
+// class Solution {
+// public:
+//     int minDepth(TreeNode* root) {
+//         if(!root){
+//             return 0;
+//         }
+//         vector<TreeNode*> path;
+//         int ans = INT_MAX;
+//         help(path, ans, root);
+//         return ans;
+//     }
+
+//     void help(vector<TreeNode*> path, int &ans, TreeNode* node){
+//         path.push_back(node);
+
+//         if(!node->left && !node->right){
+//             ans = min(ans, int(path.size()));
+//         }
+
+//         if(node->left){
+//             help(path, ans, node->left);
+//         }
+//         if(node->right){
+//             help(path, ans, node->right);
+//         }
+
+//         path.pop_back();
+//     }
+// };
