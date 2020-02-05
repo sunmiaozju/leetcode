@@ -213,6 +213,12 @@ Backtracking（回溯）属于 DFS。
 
 还可以暴力一点，四个 for 循环便利所有可能情况，并对总数目等于 s 大小的去进一步判断，判断每一个段是不是符合那几个条件，如果符合就是最终结果。
 
+## 94. Binary Tree Inorder Traversal
+
+可以使用递归的方法，也可以使用非递归的方法。
+
+下面再来看非递归使用栈的解法，也是符合本题要求使用的解法之一，需要用栈来做，思路是从根节点开始，先将根节点压入栈，然后再将其所有左子结点压入栈，然后取出栈顶节点，保存节点值，再将当前指针移到其右子节点上，若存在右子节点，则在下次循环时又可将其所有左子结点压入栈中。这样就保证了访问顺序为左-根-右，
+
 ## 95. unique binary search trees 2
 
 分而治之思想，这里也可以使用记忆 hash 表或者记忆数组进行记录，本质上，使用记忆数组的递归是动态规划的一种。
@@ -320,6 +326,25 @@ dict 中的单词没有使用次数的限制，因此这是一个完全背包问
 ## 141. linked list cycle
 
 使用双指针，一个指针每次移动一个节点，一个指针每次移动两个节点，如果存在环，那么这两个指针一定会相遇。如果快指针到达末尾，则说明没有环。
+
+## 144. Binary Tree Preorder Traversal
+
+前序遍历。可以递归，也可以使用栈进行 DFS。
+
+## 145. Binary Tree Postorder Traversal
+
+二叉树的后序遍历。可以使用递归实现
+
+```
+void dfs(TreeNode root) {
+    dfs(root.left);
+    dfs(root.right);
+    visit(root);
+}
+```
+
+也可以使用非递归实现：
+前序遍历为 root -> left -> right，后序遍历为 left -> right -> root。可以修改前序遍历成为 root -> right -> left，那么这个顺序就和后序遍历正好相反。
 
 ## 153. find minimum in rotated sorted array
 
@@ -723,6 +748,10 @@ sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
 
 注意负数的处理和 0 的处理。
 
+## 513. Find Bottom Left Tree Value
+
+二叉树的层次遍历。
+
 ## 518. coin-change-2
 
 这道题目是计算可以凑出目标钱数目的所有硬币组合，这是一个完全背包问题，本质和题目 322 是一样的。
@@ -780,6 +809,10 @@ sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
 
 这道题目和 two sum 2 很类似，都是在排序好的数组内寻找两个数字，只不过一个是和，一个是平方和，可以使用双指针来实现，但是要注意的是右指针的初始化可以直接初始化为 target 的根号值
 
+## 637. Average of Levels in Binary Tree
+
+二叉树的层次遍历。
+
 ## 650. 2 Keys Keyboard
 
 这道题目关键是找出规律，
@@ -791,6 +824,10 @@ sum(P) + sum(N) + sum(P) - sum(N) = target + sum(P) + sum(N)
 ## 665. non decreasing array
 
 判断 i 是否小于 i-1，如果小于，那么就需要修改，但是具体要修改哪个呢，需要看情况而定，如果 i-2 不存在，那么直接修改 i-1,如果 i-2 小于 i，那么修改 i-1,如果 i-2 大于 i，那么修改 i
+
+## 671. Second Minimum Node In a Binary Tree
+
+这道题让我们找二叉树中的第二小的结点值，并且给该二叉树做了一些限制，比如对于任意一个结点，要么其没有子结点，要么就同时有两个子结点，而且父结点值是子结点值中较小的那个，当然两个子结点值可以相等。那么直接上暴力搜索呗，根据该树的附加条件可知，根结点一定是最小的结点值 first，那么我们只要找出第二小的值 second 即可，初始化为整型的最大值。然后对根结点调用递归函数，将 first 和 second 当作参数传进去即可。在递归函数中，如果当前结点为空，直接返回，若当前结点孩值不等于 first，说明其肯定比 first 要大，然后我们看其是否比 second 小，小的话就更新 second，然后对当前结点的左右子结点分别调用递归函数即可
 
 ## 680. validPalindrome 2
 

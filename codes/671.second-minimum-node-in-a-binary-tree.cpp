@@ -69,9 +69,24 @@
  */
 class Solution {
 public:
-    int findSecondMinimumValue(TreeNode* root) {
-        
+    int findSecondMinimumValue(TreeNode* root)
+    {
+        int first = root->val;
+        unsigned long second = INT_MAX + 1, origin = INT_MAX + 1;
+        help(root, first, second);
+        return (second == first || second == origin) ? -1 : second;
+    }
+
+    void help(TreeNode* root, int first, unsigned long& second)
+    {
+        if (!root) {
+            return;
+        }
+        if (root->val != first && root->val < second) {
+            second = root->val;
+        }
+        help(root->left, first, second);
+        help(root->right, first, second);
     }
 };
 // @lc code=end
-
