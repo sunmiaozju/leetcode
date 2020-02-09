@@ -99,6 +99,22 @@ public:
             }
         }
         return true;
+
+        // if(s.size() != t.size()){
+        //     return false;
+        // }
+        // unordered_map<char, int> map;
+        // for(char a : s){
+        //     map[a]++;
+        // }
+        // for(char a : t){
+        //     if(!map.count(a) || map[a] == 0){
+        //         return false;
+        //     }else{
+        //         map[a]--;
+        //     }
+        // }
+        // return true;
     }
 };
 // @lc code=end

@@ -40,22 +40,46 @@ class Solution {
 public:
     void moveZeroes(vector<int>& nums)
     {
-        int left = 0, right;
-        while (left < nums.size()) {
-            if (nums[left]) {
-                left++;
+        // int left = 0, right;
+        // while (left < nums.size()) {
+        //     if (nums[left]) {
+        //         left++;
+        //     } else {
+        //         right = left + 1;
+        //         while (right < nums.size()) {
+        //             if (nums[right]) {
+        //                 swap(nums[left], nums[right]);
+        //                 break;
+        //             } else {
+        //                 right++;
+        //             }
+        //         }
+        //         if (right >= nums.size()) {
+        //             return;
+        //         }
+        //     }
+        // }
+        // return;
+
+        int left = 0, right = 0;
+        for (int num : nums) {
+            if (num != 0) {
+                right++;
             } else {
-                right = left + 1;
-                while (right < nums.size()) {
-                    if (nums[right]) {
-                        swap(nums[left], nums[right]);
-                        break;
-                    } else {
-                        right++;
-                    }
+                break;
+            }
+        }
+        while (right < nums.size()) {
+            if (nums[left] == 0 && nums[right] != 0) {
+                swap(nums[left], nums[right]);
+                left++;
+                right++;
+            } else {
+                if (nums[left] != 0) {
+                    left++;
                 }
-                if (right >= nums.size()) {
-                    return;
+                if (nums[right] == 0) {
+                    right++;
                 }
             }
         }
