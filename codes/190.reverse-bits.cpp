@@ -105,14 +105,23 @@ public:
         // }
         // return ans;
 
+        // uint32_t ans = 0;
+        // uint32_t mask = 1;
+        // int count = 32;
+        // while (count--) {
+        //     ans = ans << 1;
+        //     if (mask & n) {
+        //         ans += 1;
+        //     }
+        //     n = n >> 1;
+        // }
+        // return ans;
+
         uint32_t ans = 0;
-        uint32_t mask = 1;
-        int count = 32;
-        while (count--) {
-            ans = ans << 1;
-            if (mask & n) {
-                ans += 1;
-            }
+        int cnt = 32;
+        while (cnt--) {
+            int item = n & 1;
+            ans = (ans << 1) | item;
             n = n >> 1;
         }
         return ans;

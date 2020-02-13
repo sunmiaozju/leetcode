@@ -70,15 +70,35 @@ public:
         //     ones = (ones ^ nums[i]) & ~twos;
         //     twos = (twos ^ nums[i]) & ~ones;
         // }
+        // // return ones;
+
+        // int ones = 0, twos = 0, threes = 0;
+        // for (size_t i = 0; i < nums.size(); i++) {
+        //     ones = (ones ^ nums[i]) & ~twos & ~threes;
+        //     twos = (twos ^ nums[i]) & ~ones & ~threes;
+        //     threes = (threes ^ nums[i]) & ~ones & ~twos;
+        // }
         // return ones;
 
-        int ones = 0, twos = 0, threes = 0;
-        for (size_t i = 0; i < nums.size(); i++) {
-            ones = (ones ^ nums[i]) & ~twos & ~threes;
-            twos = (twos ^ nums[i]) & ~ones & ~threes;
-            threes = (threes ^ nums[i]) & ~ones & ~twos;
+        vector<int> cnt(32, 0);
+        for (int num : nums) {
+            long mask = 1;
+            for (int i = 0; i < 32; i++) {
+                if ((mask & num) != 0) {
+                    cnt[i]++;
+                    if (cnt[i] == 3) {
+                        cnt[i] = 0;
+                    }
+                }
+                mask = mask << 1;
+            }
         }
-        return ones;
+
+        long ans = 0;
+        for (int i = cnt.size() - 1; i >= 0; i--) {
+            ans = ans * 2 + cnt[i];
+        }
+        return ans;
     }
     // }
 };

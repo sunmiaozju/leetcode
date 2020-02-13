@@ -67,6 +67,18 @@ public:
             ans ^= (i + 1) ^ nums[i];
         }
         return ans;
+
+        // int sum = 0;
+        // for(int num : nums){
+        //     sum += num;
+        // }
+        // return nums.size() * (nums.size() + 1) / 2 - sum;
+
+        // int ans = 0;
+        // for (int i = 0; i < nums.size(); i++) {
+        //     ans = ans ^ nums[i] ^ (i + 1);
+        // }
+        // return ans;
     }
 };
 // @lc code=end
