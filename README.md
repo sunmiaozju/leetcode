@@ -12,6 +12,8 @@
 
 - [位操作总结](./docs/bit.md)
 
+- [剑指 offer 总结](./docs/jz-offer.md)
+
 ---
 
 ## 1. Two sum
