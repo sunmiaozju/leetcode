@@ -46,9 +46,30 @@
 // @lc code=start
 class Solution {
 public:
-    int findNthDigit(int n) {
-        
+    int findNthDigit(int n)
+    {
+        long len = 1, size = 9, num = 9;
+        while (n > num) {
+            len++;
+            size = size * 10;
+            num = num + size * len;
+        }
+        num = num - size * len + 1;
+
+        int index = (n - num) / len;
+
+        int start = pow(10, len - 1);
+        while (index--) {
+            start++;
+        }
+        index = (n - num) % len;
+
+        int item = pow(10, len - 1);
+        while (index--) {
+            start = start % item;
+            item /= 10;
+        }
+        return start / item;
     }
 };
 // @lc code=end
-

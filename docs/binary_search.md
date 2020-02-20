@@ -40,15 +40,17 @@ Intersection of Two Arrays
 
 这是比较常见的一类，因为我们要查找的目标值不一定会在数组中出现，也有可能是跟目标值相等的数在数组中并不唯一，而是有多个，那么这种情况下 nums[mid] == target 这条判断语句就没有必要存在。比如在数组 [2, 4, 5, 6, 9] 中查找数字 3，就会返回数字 4 的位置；在数组 [0, 1, 1, 1, 1] 中查找数字 1，就会返回第一个数字 1 的位置。我们可以使用如下代码：
 
-```
+```c
 int find(vector<int>& nums, int target) {
-int left = 0, right = nums.size();
-while (left < right) {
-int mid = left + (right - left) / 2;
-if (nums[mid] < target) left = mid + 1;
-else right = mid;
-}
-return right;
+    int left = 0, right = nums.size();
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] < target)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    return right;
 }
 ```
 
@@ -66,15 +68,17 @@ Heaters， Arranging Coins， Valid Perfect Square，Max Sum of Rectangle No Lar
 
 这一类也比较常见，尤其是查找第一个大于目标值的数，在 C++ 的 STL 也有专门的函数 upper_bound，这里跟上面的那种情况的写法上很相似，只需要添加一个等号，将之前的 nums[mid] < target 变成 nums[mid] <= target，就这一个小小的变化，其实直接就改变了搜索的方向，使得在数组中有很多跟目标值相同的数字存在的情况下，返回最后一个相同的数字的下一个位置。比如在数组 [2, 4, 5, 6, 9] 中查找数字 3，还是返回数字 4 的位置，这跟上面那查找方式返回的结果相同，因为数字 4 在此数组中既是第一个不小于目标值 3 的数，也是第一个大于目标值 3 的数，所以 make sense；在数组 [0, 1, 1, 1, 1] 中查找数字 1，就会返回坐标 5，通过对比返回的坐标和数组的长度，我们就知道是否存在这样一个大于目标值的数。参见下面的代码：
 
-```
+```c
 int find(vector<int>& nums, int target) {
-int left = 0, right = nums.size();
-while (left < right) {
-int mid = left + (right - left) / 2;
-if (nums[mid] <= target) left = mid + 1;
-else right = mid;
-}
-return right;
+    int left = 0, right = nums.size();
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] <= target)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    return right;
 }
 ```
 
