@@ -83,4 +83,43 @@ public:
         return ans->next;
     }
 };
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int m, int n)
+    {
+        ListNode *origin = head, *pre, *cur, *back;
+        pre = new ListNode(0);
+        pre->next = head;
+        int cnt = 1;
+        while (true) {
+            if (cnt <= m - 1) {
+                pre = pre->next;
+                cnt++;
+                continue;
+            } else if (cnt == m) {
+                back = cur = pre->next;
+                pre->next = NULL;
+
+            } else if (cnt == n + 1) {
+                back->next = cur;
+                return m == 1 ? pre->next : origin;
+            }
+            ListNode* tail = pre->next;
+            pre->next = cur;
+            cur = cur->next;
+            pre->next->next = tail;
+            cnt++;
+        }
+        return origin;
+    }
+};
 // @lc code=end

@@ -98,4 +98,25 @@ public:
         return item;
     }
 };
+
+// 另一种递归实现
+// class Solution {
+// public:
+//     ListNode* reverseList(ListNode* head) {
+//         if(!head || !head->next){
+//             return head;
+//         }
+//         if(head->next->next == NULL){
+//             ListNode *top = head->next;
+//             top->next = head;
+//             top->next->next = NULL;
+//             return top;
+//         }
+//         ListNode *tail = head->next;
+//         ListNode *top = reverseList(head->next);
+//         tail->next = head;
+//         tail->next->next = NULL;
+//         return top;
+//     }
+// };
 // @lc code=end
