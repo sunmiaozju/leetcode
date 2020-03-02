@@ -71,11 +71,6 @@ public:
 
     void help(vector<vector<int>>& paths, vector<int>& path, vector<int>& nums)
     {
-        // for (size_t i = 0; i < path.size(); i++) {
-        //     cout << path[i] << " ";
-        // }
-        // cout << endl;
-
         paths.push_back(path);
         for (size_t i = 0; i < nums.size(); i++) {
             if (!path.empty() && path[path.size() - 1] >= nums[i]) {
@@ -97,14 +92,21 @@ public:
     //     }
     // }
 };
-// int main(int argc, const char** argv)
-// {
-//     Solution s;
-//     vector<int> nums;
-//     nums.push_back(1);
-//     nums.push_back(2);
-//     nums.push_back(3);
-//     s.subsets(nums);
-//     return 0;
-// }
+
+// subset??
+// class Solution {
+// public:
+//     vector<vector<int>> subsets(vector<int>& nums) {
+//         vector<vector<int>> ans;
+//         ans.push_back({});
+//         for(auto a : nums){
+//             int size = ans.size();
+//             for(int i=0;i<size;i++){
+//                 ans.push_back(ans[i]);
+//                 ans.back().push_back(a);
+//             }
+//         }
+//         return ans;
+//     }
+// };
 // @lc code=end

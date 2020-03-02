@@ -96,4 +96,37 @@ public:
         return;
     }
 };
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int sumNumbers(TreeNode* root)
+    {
+        int ans = 0, pathsum = 0;
+        help(ans, pathsum, root);
+        return ans;
+    }
+    void help(int& sum, int pathsum, TreeNode* root)
+    {
+        if (!root) {
+            return;
+        }
+        pathsum = pathsum * 10 + root->val;
+
+        if (!root->left && !root->right) {
+            sum += pathsum;
+            return;
+        }
+        help(sum, pathsum, root->left);
+        help(sum, pathsum, root->right);
+    }
+};
 // @lc code=end
