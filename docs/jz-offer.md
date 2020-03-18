@@ -46,6 +46,31 @@
 
 回溯法，递归遍历
 
+对于不同方向的遍历，写成这种形式比较好，有利于更快的返回：
+
+```
+mem[i][j] = true;
+bool ans = false;
+ans = dfs(board, word, i + 1, j, k + 1) || dfs(board, word, i - 1, j, k + 1) ||
+                      dfs(board, word, i, j + 1, k + 1) || dfs(board, word, i , j - 1, k + 1);
+
+mem[i][j] = false;
+```
+
+这种形式不好，因为他会都走一遍
+
+```
+bool ans = false;
+        for(auto a : dir){
+            int row = i + a.first;
+            int col = j + a.second;
+            if(row>=0 && row<board.size() && col>=0 && col<board[0].size() && !mem[row][col]){
+                ans =  ans || help(board, row, col, word, dir, index + 1, mem);
+            }
+        }
+mem[i][j] = false;
+```
+
 ## 面试题 13. 机器人的运动范围
 
 BFS。 一个关键点是对已经访问的位置进行标记，但是注意要在刚开始加入到队列的时候就标记，不要在弹出的时候才标记。
