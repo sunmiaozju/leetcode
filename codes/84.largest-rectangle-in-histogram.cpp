@@ -62,6 +62,7 @@ public:
                     int index = myStack.top();
                     myStack.pop();
                     int area = heights[index] * (myStack.empty() ? i : i - myStack.top() - 1);
+                    cout << i << " " << i - myStack.top() - 1 << " " << index << endl;
                     ans = std::max(ans, area);
                 }
                 myStack.push(i);
