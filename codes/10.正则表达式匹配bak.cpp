@@ -78,36 +78,37 @@ class Solution {
 public:
     bool isMatch(string s, string p)
     {
-        if(p.size() == 0){
-            return s.size() == 0;
-        }else if(p.size() == 1){
-            if(s.size() == 1 && (s[0] == p[0] || p[0] == '.')){
+        if (p.empty()) {
+            return s.empty();
+        }
+
+        if (p.size() == 1) {
+            if (s.size() != 1) {
+                return false;
+            }
+            if (p[0] == '.' || p[0] == s[0]) {
                 return true;
-            }else{
+            }
+        }
+
+        if (p[1] != '*') {
+            if (s.empty()) {
+                return false;
+            }
+            if (p[0] == '.' || s[0] == p[0]) {
+                return isMatch(s.substr(1), p.substr(1));
+            } else {
                 return false;
             }
         }
 
-        if(p[1] != '*'){
-            if(s.empty()){
-                return false;
+        while (!s.empty() && (p[0] == '.' || p[0] == s[0])) {
+            if (isMatch(s, p.substr(2))) {
+                return true;
             }
-            if(s[0] == p[0] || p[0] == '.'){
-                return isMatch(s.substr(1), p.substr(1));
-            }else{
-                return false;
-            }
-        }else{
-            int i = 0;
-            while(i < s.size() && (s[i] == p[0] || p[0] == '.')){
-                if(isMatch(s.substr(i), p.substr(2))){
-                    return true;
-                }
-                i++;
-            }
-            return isMatch(s.substr(i), p.substr(2));
+            s = s.substr(1);
         }
-        
+        return isMatch(s, p.substr(2));
     }
 };
 // @lc code=end
