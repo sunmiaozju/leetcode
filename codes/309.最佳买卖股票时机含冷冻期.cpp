@@ -30,12 +30,29 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    int maxProfit(vector<int>& prices)
+    {
+        if (prices.size() == 0) {
+            return 0;
+        }
 
+        vector<int> have(prices.size(), 0);
+        vector<int> notHave(prices.size(), 0);
+
+        have[0] = -prices[0];
+        notHave[0] = 0;
+        for (int i = 1; i < prices.size(); i++) {
+            have[i] = max(have[i - 1], (i >= 2 ? notHave[i - 2] : 0) - prices[i]);
+            notHave[i] = max(notHave[i - 1], have[i - 1] + prices[i]);
+        }
+        return notHave[prices.size() - 1];
     }
 };
 // @lc code=end
-

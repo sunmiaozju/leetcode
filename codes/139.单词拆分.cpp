@@ -45,12 +45,44 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    bool wordBreak(string s, vector<string>& wordDict) {
+    bool wordBreak(string s, vector<string>& wordDict)
+    {
+        if (s.empty()) {
+            return false;
+        }
 
+        vector<bool> dp(s.size() + 1, false);
+        dp[0] = true;
+
+        for (int i = 1; i <= s.size(); i++) {
+            for (int j = 0; j < wordDict.size(); j++) {
+                int len = wordDict[j].size();
+                int start = i - len + 1;
+                if (start >= 1 && s.substr(start - 1, len) == wordDict[j]) {
+                    dp[i] = dp[i] || dp[start - 1];
+                }
+            }
+        }
+        return dp[s.size()];
     }
 };
-// @lc code=end
 
+// int main(int argc, char)
+// {
+//     Solution s;
+//     string s1 = "dogs";
+//     vector<string> s2;
+//     s2.push_back("dog");
+//     s2.push_back("s");
+//     s2.push_back("gs");
+
+//     s.wordBreak(s1, s2);
+// }
+// @lc code=end

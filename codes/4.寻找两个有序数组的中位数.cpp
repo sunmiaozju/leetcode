@@ -37,6 +37,10 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
@@ -44,27 +48,32 @@ public:
     {
         int m = nums1.size();
         int n = nums2.size();
-        return (help(nums1, nums2, 0, 0, (m + n + 1) / 2) + help(nums1, nums2, 0, 0, (m + n + 2) / 2)) / 2.0;
+        return (help(nums1, nums2, 0, m - 1, 0, n - 1, (m + n + 1) / 2) + help(nums1, nums2, 0, m - 1, 0, n - 1, (m + n + 2) / 2)) / 2.0;
     }
 
-    int help(vector<int>& nums1, vector<int>& nums2, int i, int j, int k)
+    double help(vector<int>& nums1, vector<int>& nums2, int s1, int e1, int s2, int e2, int k)
     {
-        if (i >= nums1.size()) {
-            return nums2[j + k - 1];
-        } else if (j >= nums2.size()) {
-            return nums1[i + k - 1];
+        int len1 = e1 - s1 + 1;
+        int len2 = e2 - s2 + 1;
+        // 确保nums1是较小的数组。
+        if (len1 > len2) {
+            return help(nums2, nums1, s2, e2, s1, e1, k);
+        }
+        if (s1 > e1) {
+            return nums2[s2 + k - 1];
         }
 
         if (k == 1) {
-            return min(nums1[i], nums2[j]);
+            return min(nums1[s1], nums2[s2]);
         }
 
-        int val1 = i + k / 2 - 1 < nums1.size() ? nums1[i + k / 2 - 1] : INT_MAX;
-        int val2 = j + k / 2 - 1 < nums2.size() ? nums2[j + k / 2 - 1] : INT_MAX;
-        if (val1 < val2) {
-            return help(nums1, nums2, i + k / 2, j, k - k / 2);
+        int index1 = s1 + min(len1, k / 2) - 1;
+        int index2 = s2 + min(len2, k / 2) - 1;
+
+        if (nums1[index1] < nums2[index2]) {
+            return help(nums1, nums2, index1 + 1, e1, s2, e2, k - (index1 - s1 + 1));
         } else {
-            return help(nums1, nums2, i, j + k / 2, k - k / 2);
+            return help(nums1, nums2, s1, e1, index2 + 1, e2, k - (index2 - s2 + 1));
         }
     }
 };

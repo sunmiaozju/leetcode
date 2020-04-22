@@ -44,12 +44,45 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    int maxProfit(vector<int>& prices)
+    {
+        if (prices.empty()) {
+            return 0;
+        }
 
+        vector<vector<int>> local(prices.size(), vector<int>(3, 0));
+        vector<vector<int>> global(prices.size(), vector<int>(3, 0));
+        for (int i = 1; i < prices.size(); i++) {
+            int diff = prices[i] - prices[i - 1];
+            for (int j = 1; j <= 2; j++) {
+                /*
+                可以这样来理解：local[i][j]=max(global[i-1][j-1]+max(diff,0),local[i-1][j]+diff)
+                第 i 天卖第 j 支股票的话，一定是下面的一种：
+
+                1. 今天刚买的
+                那么 Local(i, j) = Global(i-1, j-1)
+                相当于啥都没干
+
+                2. 昨天买的
+                那么 Local(i, j) = Global(i-1, j-1) + diff
+                等于Global(i-1, j-1) 中的交易，加上今天干的那一票
+
+                3. 更早之前买的
+                那么 Local(i, j) = Local(i-1, j) + diff
+                昨天别卖了，留到今天卖
+                */
+                local[i][j] = max(global[i - 1][j - 1] + max(0, diff), local[i - 1][j] + diff);
+                global[i][j] = max(global[i - 1][j], local[i][j]);
+            }
+        }
+        return global[prices.size() - 1][2];
     }
 };
 // @lc code=end
-

@@ -32,15 +32,26 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class NumArray {
 public:
-    NumArray(vector<int>& nums) {
-
+    vector<int> dp;
+    NumArray(vector<int>& nums)
+    {
+        dp.resize(nums.size() + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= nums.size(); i++) {
+            dp[i] = dp[i - 1] + nums[i - 1];
+        }
     }
-    
-    int sumRange(int i, int j) {
 
+    int sumRange(int i, int j)
+    {
+        return dp[j + 1] - dp[i];
     }
 };
 
@@ -50,4 +61,3 @@ public:
  * int param_1 = obj->sumRange(i,j);
  */
 // @lc code=end
-

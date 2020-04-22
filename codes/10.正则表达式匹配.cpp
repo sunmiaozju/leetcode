@@ -78,36 +78,35 @@ class Solution {
 public:
     bool isMatch(string s, string p)
     {
-        if(p.size() == 0){
+        if (p.size() == 0) {
             return s.size() == 0;
-        }else if(p.size() == 1){
-            if(s.size() == 1 && (s[0] == p[0] || p[0] == '.')){
+        } else if (p.size() == 1) {
+            if (s.size() == 1 && (s[0] == p[0] || p[0] == '.')) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
 
-        if(p[1] != '*'){
-            if(s.empty()){
+        if (p[1] != '*') {
+            if (s.empty()) {
                 return false;
             }
-            if(s[0] == p[0] || p[0] == '.'){
+            if (s[0] == p[0] || p[0] == '.') {
                 return isMatch(s.substr(1), p.substr(1));
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             int i = 0;
-            while(i < s.size() && (s[i] == p[0] || p[0] == '.')){
-                if(isMatch(s.substr(i), p.substr(2))){
+            while (i < s.size() && (s[i] == p[0] || p[0] == '.')) {
+                if (isMatch(s.substr(i), p.substr(2))) {
                     return true;
                 }
                 i++;
             }
             return isMatch(s.substr(i), p.substr(2));
         }
-        
     }
 };
 // @lc code=end

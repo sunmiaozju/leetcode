@@ -37,6 +37,10 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class TrieNode {
 public:
