@@ -64,22 +64,26 @@ public:
         }
 
         int target = sum / 2;
+
         vector<vector<bool>> dp(nums.size(), vector<bool>(target + 1, false));
 
-        if (target >= nums[0]) {
+        if (nums[0] <= target) {
             dp[0][nums[0]] = true;
         }
-        dp[0][0] = true;
+
+        for (int i = 0; i < nums.size(); i++) {
+            dp[i][0] = true;
+        }
 
         for (int i = 1; i < nums.size(); i++) {
             for (int j = 1; j <= target; j++) {
-
                 bool p1 = dp[i - 1][j];
                 bool p2 = false;
-                if (j >= nums[i]) {
+                if (nums[i] <= j) {
                     p2 = dp[i - 1][j - nums[i]];
                 }
                 dp[i][j] = p1 || p2;
+                // cout << i << " " << j << " " << dp[i][j] << endl;
             }
         }
         return dp[nums.size() - 1][target];

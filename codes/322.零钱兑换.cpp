@@ -32,47 +32,42 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    int coinChange(vector<int>& coins, int amount){
-        // vector<vector<int>> dp(2, vector<int>(amount+1, 0));
-        // for(int i=0;i<coins.size();i++){
-        //     for(int j=1;j<=amount;j++){
-        //         int num1 = INT_MAX;
-        //         if(i>=1){
-        //             num1 = dp[(i-1)%2][j];
-        //         }
-        //         int num2 = INT_MAX;
-        //         if(j >= coins[i]){
-        //             if(dp[i%2][j-coins[i]] != INT_MAX){
-        //                 num2 = dp[i%2][j-coins[i]] + 1;                        
-        //             }
-        //         }
-        //         dp[i%2][j] = min(num1, num2);
-        //     }
-        // }
-        // return dp[(coins.size()-1)%2][amount] == INT_MAX ? -1 : dp[(coins.size()-1)%2][amount];
+    int coinChange(vector<int>& coins, int amount)
+    {
+        vector<vector<int>> dp(coins.size(), vector<int>(amount + 1, INT_MAX));
 
-        vector<int> dp(amount+1, 0);
-        for(int i=0;i<coins.size();i++){
-            for(int j=1;j<=amount;j++){
-                int num1 = INT_MAX;  
-                if(i>=1){
-                    num1 = dp[j];
-                }    
-                int num2 = INT_MAX;
-                if(j >= coins[i]){
-                    if(dp[j-coins[i]] != INT_MAX){
-                        num2 = dp[j-coins[i]] + 1;                        
-                    }
+        // 初始值的初始化很重要，这里amount=0标记为dp为0,有些不好理解。
+        // 就是说我不拿出任何硬币，也可以满足amount=0，将不拿出也作为一种情况。
+        for (int i = 0; i < coins.size(); i++) {
+            dp[i][0] = 0;
+        }
+
+        for (int i = 0; i < coins.size(); i++) {
+            for (int j = 1; j <= amount; j++) {
+
+                int p1 = INT_MAX;
+                if (i >= 1) {
+                    p1 = dp[i - 1][j];
                 }
-                dp[j] = min(num1, num2);
+
+                int p2 = INT_MAX;
+                if (j >= coins[i] && dp[i][j - coins[i]] != INT_MAX) {
+                    p2 = dp[i][j - coins[i]] + 1;
+                }
+
+                dp[i][j] = min(p1, p2);
             }
         }
-        return dp[amount] == INT_MAX ? -1 : dp[amount];
+
+        return dp[coins.size() - 1][amount] == INT_MAX ? -1 : dp[coins.size() - 1][amount];
     }
 };
 
 // @lc code=end
-

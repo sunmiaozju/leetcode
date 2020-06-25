@@ -28,21 +28,21 @@ class Solution {
 public:
     int countDigitOne(int n)
     {
-        int origin = n;
         int ans = 0;
-        long a = 0, b = 1;
-        while (n) {
-            int item = n % 10;
-            if (item > 1) {
-                ans += item * a + b;
-            } else if (item == 1) {
-                ans += item * a + origin % b + 1;
+        for (long long i = 1; i <= n; i *= 10) {
+            // abcdxyz
+            int xyz = n % i;
+            int abcd = n / i;
+            int d = abcd % 10;
+            int abc = abcd / 10;
+
+            ans += abc * i;
+
+            if (d == 1) {
+                ans += xyz + 1;
+            } else if (d > 1) {
+                ans += i;
             }
-
-            a = a * 10 + b;
-            b = b * 10;
-
-            n = n / 10;
         }
         return ans;
     }

@@ -57,12 +57,34 @@
  * 
  */
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
-    int minScoreTriangulation(vector<int>& A) {
+    int minScoreTriangulation(vector<int>& A)
+    {
+        int n = A.size();
+        vector<vector<int>> dp(A.size(), vector<int>(A.size(), INT_MAX));
 
+        // 如果两个点相邻，那么不会构成三角形。
+        for (int i = 0; i < A.size(); i++) {
+            dp[i][(i + 1) % n] = 0;
+            dp[i][i] = 0;
+        }
+
+        for (int len = 3; len <= n; len++) {
+            for (int i = 0; i < n; i++) {
+                int j = (i + len - 1) % n;
+                for (int k = (i + 1) % n; k < j; k = (k + 1) % n) {
+                    dp[i][j] = min(dp[i][j], dp[i][k] + A[i] * A[k] * A[j] + dp[k][j]);
+                }
+            }
+        }
+
+        return dp[0][n - 1];
     }
 };
 // @lc code=end
-
